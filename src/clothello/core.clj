@@ -1,5 +1,7 @@
 (ns clothello.core
-  (:gen-class))
+  (:use
+   clothello.view
+   clothello.model))
 
 (defn on-command
   [cmdline]
@@ -11,6 +13,7 @@
       :else nil)))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+  (init-view on-command)
+  (init-game on-state-changed)
+  (start-ui))
