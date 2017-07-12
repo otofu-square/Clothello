@@ -15,34 +15,8 @@
 (def player (ref nil))
 
 (defn col-from-pos [pos] (mod pos b-size))
-(defn row-from-pos [pos] (quot post b-size))
+(defn row-from-pos [pos] (quot pos b-size))
 (defn pos-from-rowcol [r c] (+ (* r b-size) c))
 
 (def code-a 97)
 (def code-z 123)
-(def col-headers
-  (take b-size
-        (map (comp str char)
-             (range code-a code-z))))
-
-(def col-headers-str
-  (str "  " (join " " col-headers)))
-
-(defn- st-str
-  [st]
-  (condp = st
-    :b "x"
-    :w "o"
-    " "))
-
-(defn- board-strs
-  [brd]
-  (for [row (partition b-size brd)]
-    (join " " (map st-str row))))
-
-(defn- board-strs-with-row
-  [brd]
-  (map str
-       (range (inc first-row) (inc last-row))
-       (repeat b-size " ")
-       (board-strs brd)))
