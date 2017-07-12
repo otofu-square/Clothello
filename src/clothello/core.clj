@@ -1,16 +1,17 @@
 (ns clothello.core
   (:use
    clothello.view
-   clothello.model))
+   clothello.model
+   [clojure.core.match :refer [match]]))
 
 (defn on-command
   [cmdline]
   (let [cmd (first cmdline)
         pos (second cmdline)]
-    (cond
-      (= cmd :move) (play-move pos)
-      (= cmd :exit) (System/exit 0)
-      :else nil)))
+    (condp = cmd
+      :move (play-move pos)
+      :exit (System/exit 0)
+      nil)))
 
 (defn -main
   [& args]
